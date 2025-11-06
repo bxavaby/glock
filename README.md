@@ -14,7 +14,7 @@
 ───────────────────
 
 ### **glock** is a portmanteau that simply pairs _go_ with _block_,
-### ergo consisting of a minimal blockchain implementation.
+### ergo implying a minimal blockchain implementation.
 
 <br>
 
