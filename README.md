@@ -64,8 +64,6 @@ glock stats *shows chain stats (length, total difficulty, avg. mining time)*
   
 ───────────────────
 
-*Hope this will serve you somehow.*
-
 **[Report Bug](../../issues)** | **[Suggest Feature](../../issues)**
 
 **MIT License © 2025 bxavaby**
