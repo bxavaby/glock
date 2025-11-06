@@ -13,8 +13,8 @@
 
 ───────────────────
 
-### **glock** is a portmanteau that simply pairs _go_ with _block_,
-### ergo consisting of a minimal blockchain implementation.
+### **glock** is a simple portmanteau that blends _go_ and _block_,
+### ergo implying a minimal blockchain implementation.
 
 <br>
 
@@ -67,8 +67,6 @@ glock stats *shows chain stats (length, total difficulty, avg. mining time)*
 <div align="center">
   
 ───────────────────
-
-*Hope this will serve you somehow.*
 
 **[Report Bug](../../issues)** | **[Suggest Feature](../../issues)**
 
