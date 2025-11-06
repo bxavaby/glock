@@ -1,6 +1,6 @@
 > [!WARNING]
-> Have yet to integrate main.go in cli.go entirely. <br>
-> Key elements are missing, such as whole functions.
+> Have yet to fully test the cli. <br>
+> No key elements missing, but it might not look that pretty.
 
 #
 
@@ -15,6 +15,10 @@
 
 ### **glock** is a portmanteau that simply pairs _go_ with _block_,
 ### ergo consisting of a minimal blockchain implementation.
+
+<br>
+
+<img src="assets/help.png" width="643" alt="glock help" />
 
 <br>
 

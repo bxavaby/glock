@@ -11,10 +11,10 @@ import (
 )
 
 const (
-	green  = "\033[32m"
-	red    = "\033[31m"
-	blue   = "\033[34m"
-	yellow = "\033[33m"
+	green  = "\033[46m"
+	red    = "\033[160m"
+	blue   = "\033[27m"
+	yellow = "\033[226m"
 	reset  = "\033[0m"
 )
 
@@ -22,8 +22,12 @@ func greatSuccess(msg string) {
 	fmt.Printf("%s✓ %s%s\n", green, msg, reset)
 }
 
-func ohNoes(msg string, err error) {
+func ohNoNoes(msg string, err error) {
 	fmt.Fprintf(os.Stderr, "%s✗ %s %s%s\n", red, msg, err, reset)
+}
+
+func ohNoes(msg string) {
+	fmt.Fprintf(os.Stderr, "%s✗ %s%s\n", red, msg, reset)
 }
 
 func singleWell(msg string) {
@@ -44,7 +48,7 @@ func YesOrNo(question string) bool {
 	return false
 }
 
-func Wiper() error {
+func wipeScreen() error {
 	cmd := exec.Command("clear")
 	cmd.Stdout = os.Stdout
 	return cmd.Run()

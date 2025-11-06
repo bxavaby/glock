@@ -4,23 +4,21 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"strings"
 	"time"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/joho/godotenv"
 )
 
-func Logo() string {
-	logo := `           
+func mainLogo() string {
+	logo := `
 
-        __              __    
-.-----.|  |.-----.----.|  |--.
-|  _  ||  ||  _  |  __||    < 
-|___  ||__||_____|____||__|__|
-|_____| v0.1.0 ==============+                      
+        __              __
+.-----.|  |.-----.----.|  |--.
+|  _  ||  ||  _  |  __||    <
+|___  ||__||_____|____||__|__|
+|_____| v0.1.0 ==============+
 
 :::::::::::::::::::::::::::::::
       >_ ARR bxavaby 2025     +
@@ -35,88 +33,226 @@ func Logo() string {
 	return logo
 }
 
-func Help() string {
+func verLogo() string {
+	logo := `
+
+        __              __
+.-----.|  |.-----.----.|  |--.
+|  _  ||  ||  _  |  __||    <
+|___  ||__||_____|____||__|__|
+|_____| v0.1.0 ==============+
+
+Run 'glock init' to begin genesis.
+Run 'glock help' to see all commands.
+
+`
+	return logo
+}
+
+func helpMessage() string {
 	help := `
 Usage: glock [options]
 
 Options:
   -h, --help          Display this help message
-  -v, --version       Display the version number
 
   -a, --add           Mine and add a new block
-  -i, --init          Execute genesis block
+  -i, --init          Initialize genesis block
   -p, --print         Print entire blockchain
-  -s, --stats         Show all chain stats
+  -r, --reset         Delete blockchain instance
+  -s, --stats         Show all chain statistics
   -v, --validate      Check blockchain integrity
 `
 	return help
 }
 
-/*
-func Version() string {
-	version := "v0.1.0"
-
-	return version
-}
-*/
-
 func Run() int {
 	if len(os.Args) < 2 {
-		Wiper()
-		fmt.Println(Logo())
-		singleWell("")
+		fmt.Println(verLogo())
 		return 0
 	}
 
 	if len(os.Args) > 2 {
-		tripleWell("Use only one argument at a time!")
+		ohNoes("Use only one argument at a time!")
 	}
 
 	arg := strings.ToLower(os.Args[1])
 
 	switch arg {
 	case "-h", "--help", "help":
-		fmt.Println(Logo())
-		fmt.Println(Help())
+		fmt.Println(mainLogo())
+		fmt.Println(helpMessage())
 		return 0
+
 	case "-a", "--add", "add":
-		singleWell("Opening your config...")
-		generateBlock()
-		return 0
-	case "-i", "--init", "init":
-		singleWell("Creating genesis...")
-		err := godotenv.Load()
-		if err != nil {
-			log.Fatal(err)
+		state := blockchainState()
+
+		if state == "none" || state == "empty" {
+			ohNoNoes("Genesis does not exist! Run 'glock init' to create it.", nil)
+			return 1
 		}
 
-		go func() {
-			t := time.Now()
-			genesisBlock := Block{}
-			genesisBlock = Block{0, t.String(), 0, calculateHash(genesisBlock), "", difficulty, ""}
-			spew.Dump(genesisBlock)
+		if len(Blockchain) == 0 {
+			ohNoNoes("No blockchain found! Initialize with 'glock init'.", nil)
+			return 1
+		}
 
-			mutex.Lock()
-			Blockchain = append(Blockchain, genesisBlock)
-			mutex.Unlock()
-		}()
+		fmt.Print("Enter BPM value: ")
+		var bpm int
+		_, err := fmt.Scanf("%d", &bpm)
+		if err != nil {
+			ohNoNoes("Invalid BPM value!", err)
+			return 1
+		}
 
-		log.Fatal(run())
+		singleWell("Mining new block...")
+		mutex.Lock()
+		newBlock := generateBlock(Blockchain[len(Blockchain)-1], bpm)
+		Blockchain = append(Blockchain, newBlock)
+		mutex.Unlock()
+
+		if err := saveBlockchain(); err != nil {
+			ohNoNoes("Failed to save block:", err)
+			return 1
+		}
+
+		spew.Dump(newBlock)
+		greatSuccess("Block has been mined!")
 		return 0
+
+	case "-i", "--init", "init":
+		wipeScreen()
+
+		state := blockchainState()
+
+		if state == "populated" || state == "genesis-only" {
+			ohNoNoes("Blockchain already exists! Run 'glock reset' to reset it.", nil)
+			return 1
+		}
+
+		singleWell("Initializing genesis...")
+		t := time.Now()
+		genesisBlock := Block{
+			Index:      0,
+			Timestamp:  t.String(),
+			BPM:        0,
+			Hash:       "",
+			PrevHash:   "",
+			Difficulty: difficulty,
+			Nonce:      "",
+		}
+		genesisBlock.Hash = calculateHash(genesisBlock)
+
+		mutex.Lock()
+		Blockchain = append(Blockchain, genesisBlock)
+		mutex.Unlock()
+
+		if err := saveBlockchain(); err != nil {
+			ohNoNoes("Failed to save genesis block:", err)
+			return 1
+		}
+
+		spew.Dump(genesisBlock)
+		greatSuccess("Genesis has begun!")
+		return 0
+
 	case "-p", "--print", "print":
-		// Logic to print the entire blockchain
+		wipeScreen()
+
+		state := blockchainState()
+
+		if state == "none" || state == "empty" {
+			ohNoNoes("Genesis does not exist! Run 'glock init' to create it.", nil)
+			return 1
+		}
+
+		if err := loadBlockchain(); err != nil {
+			ohNoNoes("Failed to load blockchain:", err)
+			return 1
+		}
+
+		if state == "genesis-only" {
+			singleWell("Blockchain contains only the genesis block:")
+		} else {
+			singleWell(fmt.Sprintf("Blockchain contains %d blocks:", len(Blockchain)))
+		}
+
+		// Print the entire blockchain
+		printBlockchain()
 		return 0
+
+	case "-r", "--reset", "reset":
+		wipeScreen()
+
+		state := blockchainState()
+
+		singleWell("Resetting blockchain...\n")
+
+		if state == "none" || state == "empty" {
+			tripleWell("Blockchain is already empty.")
+			return 0
+		}
+
+		if !YesOrNo("This will DELETE the entire blockchain. Are you sure?") {
+			singleWell("Reset cancelled.")
+			return 0
+		}
+
+		if err := os.Remove(blockchainData); err != nil {
+			ohNoNoes("Failed to delete data:", err)
+			return 1
+		}
+
+		mutex.Lock()
+		Blockchain = []Block{}
+		mutex.Unlock()
+
+		greatSuccess("Blockchain has been reset!")
+		return 0
+
 	case "-s", "--stats", "stats":
-		// Logic to print all chain stats
-		// Such as length, total difficulty,
-		// avg. mining time, etc
+		wipeScreen()
+
+		state := blockchainState()
+
+		if state == "none" || state == "empty" {
+			ohNoes("No data available!")
+			return 0
+		}
+
+		if err := loadBlockchain(); err != nil {
+			ohNoNoes("Failed to load blockchain:", err)
+			return 1
+		}
+
+		// Print all chain stats
+		showStats()
 		return 0
+
 	case "-v", "--validate", "validate":
-		// Logic to check and print blockchain integrity
+		wipeScreen()
+		singleWell("Validating blockchain integrity...\n")
+
+		state := blockchainState()
+
+		if state == "none" || state == "empty" {
+			tripleWell("Nothing to validate!")
+			return 0
+		}
+
+		if err := loadBlockchain(); err != nil {
+			ohNoNoes("Failed to load blockchain:", err)
+			return 1
+		}
+
+		// Check and print blockchain integrity
+		validateBlockchain()
 		return 0
+
 	default:
-		fmt.Errorf("Unknown argument: %v", os.Args[1])
-		fmt.Println(Help())
+		wipeScreen()
+		fmt.Printf("Unknown argument: %v\n", os.Args[1])
+		fmt.Println(helpMessage())
 		return 1
 	}
 }
