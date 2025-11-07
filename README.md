@@ -13,8 +13,7 @@
 
 ───────────────────
 
-### **glock** is a simple portmanteau that blends _go_ and _block_,
-### ergo implying a minimal blockchain implementation.
+### **glock** is a simple portmanteau that blends _go_ and _block_
 
 <br>
 
@@ -24,7 +23,7 @@
 
 </div>
 
-## Plan && features:
+## Features
 
 - block structure w/ *hash, prev. hash, timestamp, data, nonce*
 - **PoW** mining w/ adjustable difficulty
@@ -60,7 +59,7 @@ glock stats *shows chain stats (length, total difficulty, avg. mining time)*
 
 > [!NOTE]
 > 
-> This educational blockchain implementation uses PoW (Proof-of-Work) consensus to demonstrate fundamental concepts. While Ethereum transitioned to PoS (Proof-of-Stake) in 2022, understanding PoW remains a must for blockchain devs.
+> This implementation uses PoW (Proof-of-Work) consensus to demonstrate fundamental concepts. While Ethereum transitioned to PoS (Proof-of-Stake) in 2022, understanding PoW remains a must for blockchain devs.
 
 <br>
 
