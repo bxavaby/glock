@@ -58,8 +58,8 @@ glock stats *shows chain stats (length, total difficulty, avg. mining time)*
 <br>
 
 > [!NOTE]
-> 
-> This implementation uses PoW (Proof-of-Work) consensus to demonstrate fundamental concepts. While Ethereum transitioned to PoS (Proof-of-Stake) in 2022, understanding PoW remains a must for blockchain devs.
+> This implementation uses PoW (Proof-of-Work) consensus to demonstrate fundamental concepts. <br>
+> While Ethereum transitioned to PoS (Proof-of-Stake) in 2022, understanding PoW remains a must for blockchain devs.
 
 <br>
 
