@@ -11,7 +11,7 @@ import (
 	"github.com/davecgh/go-spew/spew"
 )
 
-func mainLogo() string {
+func Logo() string {
 	logo := `
 
         __              __
@@ -33,7 +33,7 @@ func mainLogo() string {
 	return logo
 }
 
-func verLogo() string {
+func Verlogo() string {
 	logo := `
 
         __              __
@@ -49,7 +49,7 @@ Run 'glock help' to see all commands.
 	return logo
 }
 
-func helpMessage() string {
+func Help() string {
 	help := `
 Usage: glock [options]
 
@@ -68,7 +68,7 @@ Options:
 
 func Run() int {
 	if len(os.Args) < 2 {
-		fmt.Println(verLogo())
+		fmt.Println(Verlogo())
 		return 0
 	}
 
@@ -80,8 +80,8 @@ func Run() int {
 
 	switch arg {
 	case "-h", "--help", "help":
-		fmt.Println(mainLogo())
-		fmt.Println(helpMessage())
+		fmt.Println(Logo())
+		fmt.Println(Help())
 		return 0
 
 	case "-a", "--add", "add":
@@ -121,7 +121,7 @@ func Run() int {
 		return 0
 
 	case "-i", "--init", "init":
-		wipeScreen()
+		Wiper()
 
 		state := blockchainState()
 
@@ -157,7 +157,7 @@ func Run() int {
 		return 0
 
 	case "-p", "--print", "print":
-		wipeScreen()
+		Wiper()
 
 		state := blockchainState()
 
@@ -182,7 +182,7 @@ func Run() int {
 		return 0
 
 	case "-r", "--reset", "reset":
-		wipeScreen()
+		Wiper()
 
 		state := blockchainState()
 
@@ -211,7 +211,7 @@ func Run() int {
 		return 0
 
 	case "-s", "--stats", "stats":
-		wipeScreen()
+		Wiper()
 
 		state := blockchainState()
 
@@ -230,7 +230,7 @@ func Run() int {
 		return 0
 
 	case "-v", "--validate", "validate":
-		wipeScreen()
+		Wiper()
 		singleWell("Validating blockchain integrity...\n")
 
 		state := blockchainState()
@@ -250,9 +250,9 @@ func Run() int {
 		return 0
 
 	default:
-		wipeScreen()
+		Wiper()
 		fmt.Printf("Unknown argument: %v\n", os.Args[1])
-		fmt.Println(helpMessage())
+		fmt.Println(Help())
 		return 1
 	}
 }

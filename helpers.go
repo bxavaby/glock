@@ -48,7 +48,7 @@ func YesOrNo(question string) bool {
 	return false
 }
 
-func wipeScreen() error {
+func Wiper() error {
 	cmd := exec.Command("clear")
 	cmd.Stdout = os.Stdout
 	return cmd.Run()
