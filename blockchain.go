@@ -11,12 +11,9 @@
 
  Integrated and adapted blockchain code from a 2018 article.
  The original code sets up a Go server and a REST API for
- blockchain operations.
-
- Using flags/arguments, we can easily communicate with it
- in the same fashion, however in a much more convenient manner.
-
- Command-line components (and other helpers) by github.com/bxavaby
+ blockchain operations. Using flags/arguments, we can easily
+ communicate with it in the same fashion, however in a much
+ more convenient manner.
 
  MIT License © 2025 bxavaby
 
@@ -111,7 +108,6 @@ func generateBlock(oldBlock Block, BPM int) Block {
 	return newBlock
 }
 
-// Function to print the entire blockchain
 func printBlockchain() {
 	for i, block := range Blockchain {
 		fmt.Printf("\n:.:.:.:.:.:[ Block #%d ]:.:.:.:.:.:", i)
@@ -127,7 +123,6 @@ func printBlockchain() {
 	greatSuccess("\nBlockchain has been printed!")
 }
 
-// Function to calculate and print blockchain metrics
 func showStats() {
 	totalDifficulty := 0
 	for _, block := range Blockchain {
@@ -144,7 +139,6 @@ func showStats() {
 	greatSuccess("Stats have been printed!")
 }
 
-// Function to validate the blockchain
 func validateBlockchain() {
 	state := blockchainState()
 

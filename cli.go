@@ -177,7 +177,6 @@ func Run() int {
 			singleWell(fmt.Sprintf("Blockchain contains %d blocks:", len(Blockchain)))
 		}
 
-		// Print the entire blockchain
 		printBlockchain()
 		return 0
 
@@ -225,7 +224,6 @@ func Run() int {
 			return 1
 		}
 
-		// Print all chain stats
 		showStats()
 		return 0
 
@@ -245,7 +243,6 @@ func Run() int {
 			return 1
 		}
 
-		// Check and print blockchain integrity
 		validateBlockchain()
 		return 0
 
