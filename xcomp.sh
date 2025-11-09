@@ -58,11 +58,17 @@ echo "Copying $REPO to $TARGET_PATH"
 sudo cp "$REPO" "$TARGET_PATH/$REPO"
 
 if [ $? -ne 0 ]; then
-	echo
 	echo -e "\033[31m✗\033[0m Could not copy $REPO to $TARGET_PATH"
 	# sleep 1
 else
-	echo
 	echo -e "\033[32m✓\033[0m Copied $REPO to $TARGET_PATH"
 	# sleep 1
 fi
+
+echo
+echo "Making checksums.txt with sha256sum..."
+sleep 2
+
+sha256sum "$DIR"/glock-* > "$DIR/checksums.txt"
+
+echo -e "\033[32m✓\033[0m All done!"
