@@ -17,7 +17,7 @@
 
 <br>
 
-<img src="assets/help.png" width="643" alt="glock help" />
+<img src="assets/help.png" width="654" alt="glock help" />
 
 </div>
 
