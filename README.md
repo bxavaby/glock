@@ -19,40 +19,106 @@
 
 <img src="assets/help.png" width="643" alt="glock help" />
 
-<br>
-
 </div>
 
-## Features
+<br><br>
 
-- block structure w/ *hash, prev. hash, timestamp, data, nonce*
-- **PoW** mining w/ adjustable difficulty
-- chain validation == integrity
-- add blocks
-- **SHA-256** hash calculation
+## Install
+
+Download the latest binary for your platform from [**Releases**](../../releases/latest) and add it to your PATH:
+
+<br>
+
+**Linux (x86_64):**
+```
+wget https://github.com/bxavaby/glock/releases/latest/download/glock-linux-amd64
+chmod +x glock-linux-amd64
+sudo mv glock-linux-amd64 /usr/local/bin/glock
+```
+
+**Linux (ARM64):**
+```
+wget https://github.com/bxavaby/rnm/releases/latest/download/glock-linux-arm64
+chmod +x glock-linux-arm64
+sudo mv glock-linux-arm64 /usr/local/bin/glock
+```
+
+**macOS (Intel):**
+```
+wget https://github.com/bxavaby/rnm/releases/latest/download/glock-darwin-amd64
+chmod +x glock-darwin-amd64
+sudo mv glock-darwin-amd64 /usr/local/bin/glock
+```
+
+**macOS (Apple Silicon):**
+```
+curl -LO https://github.com/bxavaby/glock/releases/latest/download/glock-darwin-arm64
+chmod +x glock-darwin-arm64
+sudo mv glock-darwin-arm64 /usr/local/bin/glock
+```
+
+**Windows (x86_64):**
+```
+curl -LO https://github.com/bxavaby/glock/releases/latest/download/glock-windows-amd64.exe
+chmod +x glock-windows-amd64.exe
+move glock-windows-amd64.exe C:\Windows\System32\glock.exe
+```
+
+**Windows (ARM64):**
+```
+curl -LO https://github.com/bxavaby/glock/releases/latest/download/glock-windows-arm64.exe
+chmod +x glock-windows-arm64.exe
+move glock-windows-arm64.exe C:\Windows\System32\glock.exe
+```
+
+<br>
+
+<details>
+<summary><b>Build from source (alternative)</b></summary>
+
+<br>
+
+```
+git clone https://github.com/bxavaby/glock.git
+cd glock
+go build -o glock main.go
+sudo mv glock /usr/local/bin/
+```
+
+</details>
 
 <br>
 
 ## Command-line
 
 ```
-glock init *initializes the blockchain w/ genesis*
+# Initialize blockchain w/ genesis
+glock init
 ```
 
 ```
-glock add "data" *mines and adds a new block w/ custom data*
+# Mine and add a new block with BPM data
+glock add
 ```
 
 ```
-glock print *prints the entire blockchain*
+# Show chain stats
+glock stats
 ```
 
 ```
-glock validate *checks blockchain integrity*
+# Print entire blockchain
+glock print
 ```
 
 ```
-glock stats *shows chain stats (length, total difficulty, avg. mining time)*
+# Check integrity
+glock validate
+```
+
+```
+# Erase current data
+glock reset
 ```
 
 <br>
