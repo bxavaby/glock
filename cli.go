@@ -28,7 +28,6 @@ func Logo() string {
 |       ̿'\̵͇̿̿\з=(◕_◕)=ε/̵͇̿̿/'̿'̿      |
 |      go blockchain cli      |
 +-----------------------------+
-
 `
 	return logo
 }
