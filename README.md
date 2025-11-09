@@ -38,7 +38,7 @@ sudo mv glock-linux-amd64 /usr/local/bin/glock
 
 **Linux (ARM64):**
 ```
-wget https://github.com/bxavaby/rnm/releases/latest/download/glock-linux-arm64
+wget https://github.com/bxavaby/glock/releases/latest/download/glock-linux-arm64
 chmod +x glock-linux-arm64
 sudo mv glock-linux-arm64 /usr/local/bin/glock
 ```
@@ -57,7 +57,7 @@ chmod +x glock-darwin-arm64
 sudo mv glock-darwin-arm64 /usr/local/bin/glock
 ```
 
-**Windows (x86_64):**
+**Windows (AMD64):**
 ```
 curl -LO https://github.com/bxavaby/glock/releases/latest/download/glock-windows-amd64.exe
 chmod +x glock-windows-amd64.exe
