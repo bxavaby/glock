@@ -45,7 +45,7 @@ sudo mv glock-linux-arm64 /usr/local/bin/glock
 
 **macOS (Intel):**
 ```
-wget https://github.com/bxavaby/rnm/releases/latest/download/glock-darwin-amd64
+curl -LO https://github.com/bxavaby/rnm/releases/latest/download/glock-darwin-amd64
 chmod +x glock-darwin-amd64
 sudo mv glock-darwin-amd64 /usr/local/bin/glock
 ```
