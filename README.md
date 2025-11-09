@@ -31,9 +31,9 @@ Download the latest binary for your platform from [**Releases**](../../releases/
 
 **Linux (x86_64):**
 ```
-wget https://github.com/bxavaby/glock/releases/latest/download/glock-linux-x86_64
-chmod +x glock-linux-x86_64
-sudo mv glock-linux-x86_64 /usr/local/bin/glock
+wget https://github.com/bxavaby/glock/releases/latest/download/glock-linux-amd64
+chmod +x glock-linux-amd64
+sudo mv glock-linux-amd64 /usr/local/bin/glock
 ```
 
 **Linux (ARM64):**
@@ -45,9 +45,9 @@ sudo mv glock-linux-arm64 /usr/local/bin/glock
 
 **macOS (Intel):**
 ```
-curl -LO https://github.com/bxavaby/rnm/releases/latest/download/glock-darwin-x86_64
-chmod +x glock-darwin-x86_64
-sudo mv glock-darwin-x86_64 /usr/local/bin/glock
+curl -LO https://github.com/bxavaby/rnm/releases/latest/download/glock-darwin-amd64
+chmod +x glock-darwin-amd64
+sudo mv glock-darwin-amd64 /usr/local/bin/glock
 ```
 
 **macOS (Apple Silicon):**
